@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campaign Assets · Digitain Sportsbook</title>
+  <link rel="icon" href="/assets/logo.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-row">
+      <img class="logo" src="/assets/logo.svg" alt="Digitain Sportsbook" />
+      <div class="top-actions">
+        <button class="btn ghost" id="exportBtn" title="Download as CSV">Export CSV</button>
+        <button class="btn primary hidden" id="addBtn">+ Add asset</button>
+        <button class="btn ghost" id="loginBtn">Admin login</button>
+        <button class="btn ghost hidden" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <span class="pill">Campaign hub</span>
+      <h1>Published campaign assets</h1>
+      <p>Every landing page, article and posting from our campaigns, with its public link.</p>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="filters">
+      <input id="q" type="search" placeholder="Search title, channel, notes…" />
+      <select id="fCampaign"><option value="">All campaigns</option></select>
+      <select id="fType"><option value="">All types</option></select>
+      <select id="fStatus"><option value="">All statuses</option></select>
+    </section>
+
+    <div id="notice" class="notice hidden"></div>
+    <section class="grid" id="grid"></section>
+    <p class="empty hidden" id="empty">No assets yet.</p>
+  </main>
+
+  <footer class="wrap foot">Digitain Sportsbook · You lead, we cover</footer>
+
+  <!-- Login -->
+  <dialog id="loginDlg">
+    <form method="dialog" id="loginForm" class="dlg">
+      <h2>Admin login</h2>
+      <label>Password<input type="password" name="password" required autocomplete="current-password" /></label>
+      <p class="err" id="loginErr"></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+        <button class="btn primary" type="submit">Log in</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Add / edit -->
+  <dialog id="assetDlg">
+    <form method="dialog" id="assetForm" class="dlg wide">
+      <h2 id="assetDlgTitle">Add asset</h2>
+      <input type="hidden" name="id" />
+      <div class="form-grid">
+        <label class="span2">Title *<input name="title" required maxlength="200" placeholder="e.g. World Cup Welcome Bonus landing" /></label>
+        <label class="span2">Public link *<input name="url" type="url" required placeholder="https://…" /></label>
+        <label>Type<select name="type"></select></label>
+        <label>Status<select name="status"></select></label>
+        <label>Campaign<input name="campaign" list="campaignList" placeholder="e.g. World Cup 2026" /></label>
+        <label>Channel / platform<input name="channel" list="channelList" placeholder="e.g. LinkedIn, Website, SBC News" /></label>
+        <label>Market<input name="market" placeholder="e.g. Global, LATAM" /></label>
+        <label>Publish date<input name="publishedAt" type="date" /></label>
+        <label class="span2">Notes<textarea name="notes" rows="3" maxlength="1000"></textarea></label>
+      </div>
+      <datalist id="campaignList"></datalist>
+      <datalist id="channelList"></datalist>
+      <p class="err" id="assetErr"></p>
+      <div class="dlg-actions">
+        <button type="button" class="btn ghost" data-close>Cancel</button>
+        <button class="btn primary" type="submit">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
